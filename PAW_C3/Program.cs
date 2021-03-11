@@ -26,7 +26,7 @@ namespace curs3
              Console.WriteLine(ase);*/
             #endregion
 
-            #region
+            #region delegat
 
             static opAritmetice getFunctie(char semn)
             {

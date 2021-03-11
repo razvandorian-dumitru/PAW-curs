@@ -9,7 +9,7 @@ namespace curs3
         string nume;
         int nrOre;
         int salOrar;
-        int salariu;  //e read only
+        int salariu;  //e read only 
         int calculSalariu() => this.salariu = this.nrOre * this.salOrar;
 
         public Salariat()

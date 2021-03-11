@@ -18,7 +18,7 @@ namespace curs3
         }
         public int FondSalarii => this.listaSal.Sum(s=>s.Salariu);
         public Salariat this[int key]
-        {
+        { 
             get
             {
                 if (key>=this.listaSal.Count) throw new IndexOutOfRangeException() ;

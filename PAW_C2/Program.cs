@@ -1,103 +1,104 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace PAW_C2
+namespace PAW_C2test
 {
-
-    class Produs
+    interface IFigura
     {
-        int cod;
-        string denumire;
-        float pret;
-        int cantitate;
+        //ca un contract
+        //contine declararile
+        //toate elementele sunt publice
+        //nu putem avea atribute, deci nu se pot instantia, decat prin intermediul claselor?
 
-        double valoare;
-        public Produs()
-        {
 
-            this.cod = 0;
-            this.denumire = "NULL";
-            this.pret = 0;
-            this.cantitate = 0;
-
+        double Aria
+        {//nu putem spune cum va arata get-ul , dar putem spune ca aria va fi de tip read-only
+            get;
         }
-        public Produs(int cod, string denumire, float pret, int cantitate)
-        {
-
-            this.cod = cod;
-            this.denumire = denumire;
-            this.pret = pret;
-            this.cantitate = cantitate;
-
-        }
-        public Produs(Produs p)
-        {
-
-            this.cod = p.cod;
-            this.denumire = p.denumire;
-            this.pret = p.pret;
-            this.cantitate = p.cantitate;
-
-        }
-
-        public int Cod
-        {
-            get { return this.cod; }
-            set { if (value != null) this.cod = value; }
-        }
-        public string Denumire
-        {
-            get { return this.denumire; }
-            set { if (value != null) this.denumire = value; }
-        }
-        public float Pret
-        {
-            get { return this.pret; }
-            set { if (value != null) this.pret = value; }
-        }
-        public int Cantitate
-        {
-            get { return this.cantitate; }
-            set { if (value != null) this.cantitate = value; }
-        }
-        public double Valoare
-        {
-            //proprietate read-only
-            get { total(); return this.valoare; }
-        }
-
-
-        void total() { this.valoare = this.cantitate * this.pret; }
-
-        public override string ToString()
-        {
-            return "Cod: " + this.cod + "Denumire: " + this.denumire + "Pret: "
-                + this.pret + "Cantitate: " + this.cantitate + "Total: " + Valoare + "\n";
-        }
-
-
-
+        double Perimetru
+        { get; }
     }
 
+    //CLASA ABSTRACTA
+    //daca sintactic apare ca o mostenire, in acest caz vorbim de implementarea unei interfete
+    //putem mosteni o singura clasa in C#, dar un nr indiferent de interfete
+    //putem avea atribute, desi nu poate fi instantiata
 
+    abstract class Figura : IFigura
+    {//clasa abstracta inchide ierarhii 
+     //ca un fel de numitor comun pt toate clasele
+
+        protected int dimensiune;
+        protected double aria, perimetru;
+        public Figura() { this.dimensiune = 0; }
+        public Figura(int dimensiune) { this.dimensiune = dimensiune; }
+
+        //abstract -> metode virtua pure in C#
+        protected abstract void calculAria();
+        protected abstract void calculPerimetru();
+        public double Aria { get { calculAria(); return this.aria; } }
+        public double Perimetru { get { calculPerimetru(); return this.perimetru; } }
+    }
+    class Patrat : Figura
+    {
+        public Patrat(int dimensiune) : base(dimensiune) { }
+
+        protected override void calculAria() { this.aria = this.dimensiune * dimensiune; }
+        protected override void calculPerimetru() { this.perimetru = this.dimensiune * 4; }
+    }
+    class Cerc : Figura
+    {
+        public Cerc(int dimensiune) : base(dimensiune) { }
+
+        protected override void calculAria() { this.aria = Math.PI * this.dimensiune * this.dimensiune; }
+        protected override void calculPerimetru() { this.perimetru = 2 * Math.PI * this.dimensiune; }
+    }
+    class Dreptunghi : Figura
+    {
+        protected int latime;
+        public Dreptunghi(int dimensiune, int latime) : base(dimensiune) { this.latime = latime; }
+        protected override void calculAria() { this.aria = this.dimensiune * this.latime; }
+        protected override void calculPerimetru() { this.perimetru = this.dimensiune * 2 + this.latime * 2; }
+    }
     class Program
     {
         static void Main(string[] args)
         {
+            #region produs
+            /*  List<ProdusAngro> produse = new List<ProdusAngro>();
+                  void display()
+                  {
+                      for (int i = 0; i < produse.Count; i++)
+                          Console.WriteLine("***** Produs " + (i + 1) + " *****\n" + produse[i] + "\n");
+                  }
 
-            //Produs p1 = new Produs(123, "Lapte", 25.0f, 2);
-            Produs p1 = new Produs();
-
-            Console.WriteLine(p1);
-
+                  ProdusAngro pa1 = new ProdusAngro(100, "Lapte2", 200, 10);
+                  ProdusAdaos pa2 = new ProdusAdaos(123, "Lapte", 3, 4.2f, 10);
+                  pa2.Cantitate = 10;
 
 
-            
+                  produse.Add(pa1);
+                  produse.Add(pa2);
 
+                  display();*/
+            #endregion
+            #region figuri
 
+            Figura figura;
+
+            Patrat patrat = new Patrat(3);
+            figura = patrat;
+            Console.WriteLine(figura.Aria + " -> " + figura.Perimetru);
+
+            Cerc cerc = new Cerc(10);
+            figura = cerc;
+            Console.WriteLine(figura.Aria.ToString("#.##") + " -> " + figura.Perimetru.ToString("#.##"));
+
+            Dreptunghi dreptunghi = new Dreptunghi(10, 10);
+            figura = dreptunghi;
+            Console.WriteLine(figura.Aria + " -> " + figura.Perimetru);
+
+            #endregion
 
         }
     }
