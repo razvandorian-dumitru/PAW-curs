@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/projectSettingsUpdater.xml
+/modules.xml
+/.idea.PAW_C2test.iml
+# Datasource local storage ignored files
+/../../../../../../../../../../:\Users\Razvan\Facultate\PAW\PAW_curs\PAW_C2\.idea\.idea.PAW_C2test\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
