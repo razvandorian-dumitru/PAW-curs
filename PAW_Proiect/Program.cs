@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using PAW_Proiect.Formulare;
 
 namespace PAW_Proiect
 {
@@ -14,7 +15,7 @@ namespace PAW_Proiect
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Start());
         }
     }
 }
