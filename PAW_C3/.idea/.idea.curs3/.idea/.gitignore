@@ -2,12 +2,12 @@
 /shelf/
 /workspace.xml
 # Rider ignored files
-/.idea.PAW_Proiect.iml
 /modules.xml
-/projectSettingsUpdater.xml
 /contentModel.xml
+/.idea.curs3.iml
+/projectSettingsUpdater.xml
 # Datasource local storage ignored files
-/../../../../../../../../../../:\Users\Razvan\Facultate\PAW\da\PAW_Proiect\.idea\.idea.PAW_Proiect\.idea/dataSources/
+/../../../../../../../../../../:\Users\Razvan\Facultate\PAW\PAW_curs\PAW_C3\.idea\.idea.curs3\.idea/dataSources/
 /dataSources.local.xml
 # Editor-based HTTP Client requests
 /httpRequests/
