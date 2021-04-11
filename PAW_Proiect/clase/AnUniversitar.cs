@@ -110,7 +110,7 @@ namespace PAW_Proiect.clase
             return (float) suma / materiiList.Count;
         }
 
-        public float MediaAnuala => mediaAnuala = calculMedieAnuala();
+        public float MediaGenerala => mediaAnuala = calculMedieAnuala();
 
         public override string ToString()
         {

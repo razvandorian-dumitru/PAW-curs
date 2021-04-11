@@ -7,6 +7,8 @@ namespace PAW_Proiect.Formulare
 {
     public partial class Start : Form
     {
+        private List<Student> studentList = new List<Student>();
+
         public Start()
         {
             InitializeComponent();
@@ -16,23 +18,21 @@ namespace PAW_Proiect.Formulare
         {
             AddStudent addStudent = new AddStudent();
             addStudent.Show();
-
-
-            Start start = new Start();
-
-            start.Close(); // closes the Form2 instance.
         }
 
-        private void addMaterieToolStripMenuItem_Click(object sender, EventArgs e)
+        private void listaStudentiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AddMaterie addMaterie = new AddMaterie();
-            addMaterie.Show();
+            StudentiForm studentiForm = new StudentiForm(studentList);
+            studentiForm.Show();
         }
 
-        private void addAnToolStripMenuItem_Click(object sender, EventArgs e)
-        { 
-            AddAnUniversitar addAnUniversitar = new AddAnUniversitar();
-            
+        private void Start_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.Shift && e.KeyCode == Keys.A)
+            {
+                optiuniToolStripMenuItem.PerformClick();
+                addStudentToolStripMenuItem.PerformClick();
+            }
         }
     }
 }

@@ -31,45 +31,30 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.optiuniToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addMaterieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addAnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addStudentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.listaStudentiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fisierTextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.optiuniToolStripMenuItem, this.fisierTextToolStripMenuItem});
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.optiuniToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(818, 28);
             this.menuStrip1.TabIndex = 19;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // optiuniToolStripMenuItem
             // 
-            this.optiuniToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.addMaterieToolStripMenuItem, this.addAnToolStripMenuItem, this.addStudentToolStripMenuItem, this.listaStudentiToolStripMenuItem, this.aboutToolStripMenuItem});
+            this.optiuniToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.addStudentToolStripMenuItem, this.listaStudentiToolStripMenuItem, this.aboutToolStripMenuItem});
+            this.optiuniToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
             this.optiuniToolStripMenuItem.Name = "optiuniToolStripMenuItem";
             this.optiuniToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
             this.optiuniToolStripMenuItem.Text = "Optiuni";
-            // 
-            // addMaterieToolStripMenuItem
-            // 
-            this.addMaterieToolStripMenuItem.Name = "addMaterieToolStripMenuItem";
-            this.addMaterieToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
-            this.addMaterieToolStripMenuItem.Text = "Add Materie";
-            this.addMaterieToolStripMenuItem.Click += new System.EventHandler(this.addMaterieToolStripMenuItem_Click);
-            // 
-            // addAnToolStripMenuItem
-            // 
-            this.addAnToolStripMenuItem.Name = "addAnToolStripMenuItem";
-            this.addAnToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
-            this.addAnToolStripMenuItem.Text = "Add An";
-            this.addAnToolStripMenuItem.Click += new System.EventHandler(this.addAnToolStripMenuItem_Click);
             // 
             // addStudentToolStripMenuItem
             // 
@@ -83,6 +68,7 @@
             this.listaStudentiToolStripMenuItem.Name = "listaStudentiToolStripMenuItem";
             this.listaStudentiToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
             this.listaStudentiToolStripMenuItem.Text = "Lista Studenti";
+            this.listaStudentiToolStripMenuItem.Click += new System.EventHandler(this.listaStudentiToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -90,39 +76,48 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(167, 24);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // fisierTextToolStripMenuItem
-            // 
-            this.fisierTextToolStripMenuItem.Name = "fisierTextToolStripMenuItem";
-            this.fisierTextToolStripMenuItem.Size = new System.Drawing.Size(93, 24);
-            this.fisierTextToolStripMenuItem.Text = "Fisier Text?";
-            // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(251, 95);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int) (((byte) (128)))), ((int) (((byte) (64)))), ((int) (((byte) (0)))));
+            this.label1.Location = new System.Drawing.Point(127, 122);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(187, 81);
+            this.label1.Size = new System.Drawing.Size(404, 38);
             this.label1.TabIndex = 20;
-            this.label1.Text = "Gestiune facultate";
+            this.label1.Text = "GESTIUNE FACULTATE";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int) (((byte) (128)))), ((int) (((byte) (64)))), ((int) (((byte) (0)))));
+            this.label2.Location = new System.Drawing.Point(644, 406);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(144, 32);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Dumitru Razvan Dorian\r\nan III, seria C, gr. 1080";
             // 
             // Start
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (216)))), ((int) (((byte) (208)))), ((int) (((byte) (193)))));
+            this.ClientSize = new System.Drawing.Size(818, 450);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int) (((byte) (216)))), ((int) (((byte) (208)))), ((int) (((byte) (193)))));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Start";
             this.Text = "Start";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Start_KeyDown);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
         }
 
-        private System.Windows.Forms.ToolStripMenuItem addAnToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addMaterieToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem fisierTextToolStripMenuItem;
+        private System.Windows.Forms.Label label2;
 
         private System.Windows.Forms.Label label1;
 

@@ -29,13 +29,9 @@ namespace PAW_Proiect.clase
             this.credite = credite;
             this.nota = nota;
             if (this.credite >= 4)
-                this.tipExamen = TipExamen.EXAMEN;
-            else this.tipExamen = TipExamen.VERIFICARE;
+                tipExamen = TipExamen.EXAMEN;
+            else tipExamen = TipExamen.VERIFICARE;
         }
-
-        #region operatori
-
-        #endregion
 
         #region acces si toString
 
@@ -68,10 +64,10 @@ namespace PAW_Proiect.clase
 
         public TipExamen calculTipExamen()
         {
-            if (this.credite >= 4)
-                this.tipExamen = TipExamen.EXAMEN;
-            else this.tipExamen = TipExamen.VERIFICARE;
-            return this.tipExamen;
+            if (credite >= 4)
+                tipExamen = TipExamen.EXAMEN;
+            else tipExamen = TipExamen.VERIFICARE;
+            return tipExamen;
         }
 
         public TipExamen TipExamen
@@ -88,16 +84,16 @@ namespace PAW_Proiect.clase
         public int CompareTo(object obj)
         {
             Materie m = (Materie) obj;
-            if (this.credite < m.credite)
+            if (credite < m.credite)
                 return -1;
-            if (this.credite > m.credite)
+            if (credite > m.credite)
                 return 1;
             return string.Compare(this.denumire, m.denumire);
         }
 
         public override string ToString()
         {
-            return this.denumire + " | " + this.credite + " | " + this.nota + " | " + this.tipExamen;
+            return Denumire + " | " + Credite + " | " + Nota + " | " + TipExamen;
         }
 
         #endregion

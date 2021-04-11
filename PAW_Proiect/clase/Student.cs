@@ -16,44 +16,28 @@ namespace PAW_Proiect.clase
         BURSA
     }
 
-    public class Student : ICloneable, IComparable
+    public class Student : Persoana, ICloneable, IComparable
     {
-        private int cod;
-        private string nume;
-        private int varsta;
-        private List<AnUniversitar> aniList;
+        private List<Materie> materiiList;
+        private int crediteTotale;
         private float medieGenerala;
         private Finantare finantare;
 
-
-        public Student()
+        public Student() : base()
         {
-            cod = 0;
-            nume = "Anonim";
-            varsta = 0;
-            this.aniList = null;
-            finantare = Finantare.TAXA;
+            materiiList = null;
+            crediteTotale = 0;
             medieGenerala = 0;
+            finantare = Finantare.TAXA;
         }
 
-        public Student(int cod, string nume, int varsta,
-            List<AnUniversitar> anlist)
+        public Student(int cod, string nume, int varsta, string sex, int an,
+            List<Materie> materiiList) : base(cod, nume, varsta, sex, an)
         {
-            this.cod = cod;
-            this.nume = nume;
-            this.varsta = varsta;
-            this.aniList = anlist;
-            
+            this.materiiList = materiiList;
         }
 
         #region interfete
-
-        public int spuneAnNastere()
-        {
-            int anNastere = DateTime.Now.Year - varsta;
-            //Console.WriteLine("Anul nasterii este {0}", anNastere);
-            return anNastere;
-        }
 
         public float calculMedieGenerala()
         {
@@ -63,18 +47,29 @@ namespace PAW_Proiect.clase
         public Finantare calculFinantare()
         {
             if (medieGenerala >= 9)
-                this.finantare = Finantare.BURSA;
+                finantare = Finantare.BURSA;
             else if (medieGenerala >= 6)
-                this.finantare = Finantare.BUGET;
-            else this.finantare = Finantare.TAXA;
-            return this.finantare;
+                finantare = Finantare.BUGET;
+            else finantare = Finantare.TAXA;
+            return finantare;
+        }
+
+        public int calculCredite()
+        {
+            if (materiiList != null)
+            {
+                int suma = 0;
+                foreach (Materie materie in materiiList)
+                    suma += materie.Credite;
+                return suma;
+            }
+
+            return 0;
         }
 
         public object Clone()
         {
             var clona = (Student) MemberwiseClone();
-            // var noteNoi = (int[]) note.Clone();
-            // clona.note = noteNoi;
             return clona;
         }
 
@@ -85,7 +80,7 @@ namespace PAW_Proiect.clase
                 return -1;
             if ((float) this > (float) s)
                 return 1;
-            return string.Compare(nume, s.nume);
+            return string.Compare(Nume, s.Nume);
         }
 
         #endregion
@@ -95,12 +90,12 @@ namespace PAW_Proiect.clase
         //cast la float  
         public static explicit operator float(Student s)
         {
-            if (s.aniList != null)
+            if (s.materiiList != null)
             {
                 float suma = 0;
-                foreach (AnUniversitar an in s.aniList)
-                    suma += an.MediaAnuala;
-                return (float) suma / s.aniList.Count;
+                foreach (Materie materie in s.materiiList)
+                    suma += materie.Nota;
+                return suma / s.materiiList.Count;
             }
 
             return 0;
@@ -108,9 +103,9 @@ namespace PAW_Proiect.clase
 
         //todo an nastere, poate o sa pot sa fac un autocomplete ceva la formuri
 
-        public static Student operator +(Student s, AnUniversitar an)
+        public static Student operator +(Student s, Materie materie)
         {
-            s.aniList.Add(an);
+            s.materiiList.Add(materie);
             return s;
         }
 
@@ -118,67 +113,42 @@ namespace PAW_Proiect.clase
 
         #region acces si toString
 
-        public int Cod
+        public List<Materie> MateriiList
         {
-            get => cod;
+            get => materiiList;
             set
             {
-                if (value >= 0) cod = value;
+                if (value != null) materiiList = value;
             }
         }
 
-        public string Nume
-        {
-            get => nume;
-            set
-            {
-                if (value.Length >= 0) nume = value;
-            }
-        }
-
-        public int Varsta
-        {
-            get => varsta;
-            set
-            {
-                if (value >= 0) varsta = value;
-            }
-        }
-
-        public List<AnUniversitar> AniList
-        {
-            get => aniList;
-            set
-            {
-                if (value != null) aniList = value;
-            }
-        }
-
+        public int CrediteTotale => crediteTotale = calculCredite();
         public float Medie => medieGenerala = calculMedieGenerala();
-        public Finantare Finantare => this.finantare = calculFinantare();
+        public Finantare Finantare => finantare = calculFinantare();
 
-        public AnUniversitar this[int index]
+        public Materie this[int index]
         {
             get
             {
-                if (aniList != null && index >= 0 && index < aniList.Count)
-                    return aniList[index];
+                if (materiiList != null && index >= 0 && index < materiiList.Count)
+                    return materiiList[index];
                 return null;
             }
             set
             {
-                if (aniList != null && index > 0 && index <= aniList.Count)
-                    aniList[index] = value;
+                if (materiiList != null && index > 0 && index <= materiiList.Count)
+                    materiiList[index] = value;
             }
         }
 
         public override string ToString()
         {
-            string final = this.cod + " | " + this.nume + " | " + this.varsta + " |  Ani de Studiu: " +
-                           Environment.NewLine;
-            foreach (AnUniversitar an in aniList)
-                final += an.ToString() + Environment.NewLine;
-            final += "  | " + Medie + " | " + Finantare;
+            string final = "Cod: " + Cod + " | Nume: " + this.Nume + " | Varsta: " + this.Varsta + " |  Sex: " +
+                           this.Sex + " |  An de Studiu: " + this.An + Environment.NewLine;
+            final += "Materii: " + Environment.NewLine;
+            foreach (Materie materie in materiiList)
+                final += materie.ToString() + Environment.NewLine;
+            final += "Medie: " + Medie + " | Nr. Total de Credite: " + CrediteTotale + " | Finantare: " + Finantare;
             return final;
         }
 
