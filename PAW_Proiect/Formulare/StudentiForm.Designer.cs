@@ -35,11 +35,13 @@ namespace PAW_Proiect.Formulare
             this.sfdScriereText = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textExp = new System.Windows.Forms.ToolStripMenuItem();
+            this.xmlExp = new System.Windows.Forms.ToolStripMenuItem();
+            this.binarExp = new System.Windows.Forms.ToolStripMenuItem();
             this.importToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.textToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.xMLToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.textImp = new System.Windows.Forms.ToolStripMenuItem();
+            this.xmlImp = new System.Windows.Forms.ToolStripMenuItem();
+            this.binarImp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,45 +66,59 @@ namespace PAW_Proiect.Formulare
             // 
             // exportToolStripMenuItem
             // 
-            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.textToolStripMenuItem, this.xMLToolStripMenuItem});
+            this.exportToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.textExp, this.xmlExp, this.binarExp});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
             this.exportToolStripMenuItem.Text = "Export";
             // 
-            // textToolStripMenuItem
+            // textExp
             // 
-            this.textToolStripMenuItem.Name = "textToolStripMenuItem";
-            this.textToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
-            this.textToolStripMenuItem.Text = "Text";
-            this.textToolStripMenuItem.Click += new System.EventHandler(this.textToolStripMenuItem_Click);
+            this.textExp.Name = "textExp";
+            this.textExp.Size = new System.Drawing.Size(112, 24);
+            this.textExp.Text = "Text";
+            this.textExp.Click += new System.EventHandler(this.textToolStripMenuItem_Click);
             // 
-            // xMLToolStripMenuItem
+            // xmlExp
             // 
-            this.xMLToolStripMenuItem.Name = "xMLToolStripMenuItem";
-            this.xMLToolStripMenuItem.Size = new System.Drawing.Size(107, 24);
-            this.xMLToolStripMenuItem.Text = "XML";
-            this.xMLToolStripMenuItem.Click += new System.EventHandler(this.xMLToolStripMenuItem_Click);
+            this.xmlExp.Name = "xmlExp";
+            this.xmlExp.Size = new System.Drawing.Size(112, 24);
+            this.xmlExp.Text = "XML";
+            this.xmlExp.Click += new System.EventHandler(this.menuXmlExp_Click);
+            // 
+            // binarExp
+            // 
+            this.binarExp.Name = "binarExp";
+            this.binarExp.Size = new System.Drawing.Size(112, 24);
+            this.binarExp.Text = "Binar";
+            this.binarExp.Click += new System.EventHandler(this.binarExp_Click);
             // 
             // importToolStripMenuItem
             // 
-            this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.textToolStripMenuItem1, this.xMLToolStripMenuItem1});
+            this.importToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.textImp, this.xmlImp, this.binarImp});
             this.importToolStripMenuItem.Name = "importToolStripMenuItem";
             this.importToolStripMenuItem.Size = new System.Drawing.Size(66, 24);
             this.importToolStripMenuItem.Text = "Import";
             // 
-            // textToolStripMenuItem1
+            // textImp
             // 
-            this.textToolStripMenuItem1.Name = "textToolStripMenuItem1";
-            this.textToolStripMenuItem1.Size = new System.Drawing.Size(107, 24);
-            this.textToolStripMenuItem1.Text = "Text";
-            this.textToolStripMenuItem1.Click += new System.EventHandler(this.textToolStripMenuItem1_Click);
+            this.textImp.Name = "textImp";
+            this.textImp.Size = new System.Drawing.Size(112, 24);
+            this.textImp.Text = "Text";
+            this.textImp.Click += new System.EventHandler(this.textToolStripMenuItem1_Click);
             // 
-            // xMLToolStripMenuItem1
+            // xmlImp
             // 
-            this.xMLToolStripMenuItem1.Name = "xMLToolStripMenuItem1";
-            this.xMLToolStripMenuItem1.Size = new System.Drawing.Size(107, 24);
-            this.xMLToolStripMenuItem1.Text = "XML";
-            this.xMLToolStripMenuItem1.Click += new System.EventHandler(this.xMLToolStripMenuItem1_Click);
+            this.xmlImp.Name = "xmlImp";
+            this.xmlImp.Size = new System.Drawing.Size(112, 24);
+            this.xmlImp.Text = "XML";
+            this.xmlImp.Click += new System.EventHandler(this.xMLToolStripMenuItem1_Click);
+            // 
+            // binarImp
+            // 
+            this.binarImp.Name = "binarImp";
+            this.binarImp.Size = new System.Drawing.Size(112, 24);
+            this.binarImp.Text = "Binar";
+            this.binarImp.Click += new System.EventHandler(this.binarImp_Click);
             // 
             // StudentiForm
             // 
@@ -122,13 +138,16 @@ namespace PAW_Proiect.Formulare
             this.PerformLayout();
         }
 
+        private System.Windows.Forms.ToolStripMenuItem binarExp;
+        private System.Windows.Forms.ToolStripMenuItem binarImp;
+
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem xMLToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem xMLToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem textExp;
+        private System.Windows.Forms.ToolStripMenuItem textImp;
+        private System.Windows.Forms.ToolStripMenuItem xmlExp;
+        private System.Windows.Forms.ToolStripMenuItem xmlImp;
 
         private System.Windows.Forms.SaveFileDialog sfdScriereText;
 

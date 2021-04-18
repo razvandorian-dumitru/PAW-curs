@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -63,7 +64,77 @@ namespace PAW_Proiect.Formulare
             }
         }
 
-        private void xMLToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void xMLToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            StreamReader streamReader = new StreamReader("fisierImport.xml");
+            string str = streamReader.ReadToEnd();
+            streamReader.Close();
+
+            XmlReader reader = XmlReader.Create(new StringReader(str));
+
+            #region init
+
+            string denumire = "";
+            int credite = 0;
+            int nota = 0;
+            TipExamen tipExamen = TipExamen.VERIFICARE;
+
+            int cod = 0;
+            string nume = "";
+            int varsta = 0;
+            string sex = "";
+            int an = 0;
+
+            // List<Student> studentList = new List<Student>();
+            List<Materie> materiiList = new List<Materie>();
+
+            #endregion
+
+            while (reader.Read())
+            {
+                if (reader.Name == "Cod" && reader.NodeType == XmlNodeType.Element)
+                {
+                    reader.Read();
+                    cod = Convert.ToInt32(reader.Value);
+                }
+
+                if (reader.Name == "Nume" && reader.NodeType == XmlNodeType.Element)
+                {
+                    reader.Read();
+                    nume = reader.Value;
+                }
+
+                if (reader.Name == "Varsta" && reader.NodeType == XmlNodeType.Element)
+                {
+                    reader.Read();
+                    varsta = Convert.ToInt32(reader.Value);
+                }
+
+                if (reader.Name == "Sex" && reader.NodeType == XmlNodeType.Element)
+                {
+                    reader.Read();
+                    sex = reader.Value;
+                }
+
+                if (reader.Name == "An" && reader.NodeType == XmlNodeType.Element)
+                {
+                    reader.Read();
+                    an = Convert.ToInt32(reader.Value);
+                }
+
+                if (reader.Name == "Materie" && reader.NodeType == XmlNodeType.Element)
+                {
+                    reader.Read();
+                    an = Convert.ToInt32(reader.Value);
+                }
+
+                Student student = new Student(cod, nume, varsta, sex, an, materiiList);
+                tvStudenti.Text = student.ToString();
+            }
+        }
+
+        private void menuXmlExp_Click(object sender, EventArgs e)
         {
             //export
             try
@@ -76,7 +147,7 @@ namespace PAW_Proiect.Formulare
                 {
                     writer.WriteStartDocument();
 
-                    writer.WriteStartElement("Student " + i);
+                    writer.WriteStartElement("Student ");
 
                     //cod
                     writer.WriteStartElement("Cod");
@@ -127,7 +198,7 @@ namespace PAW_Proiect.Formulare
                         writer.WriteEndElement();
                     }
 
-                    writer.WriteEndElement();//materii
+                    writer.WriteEndElement(); //materii
                     //nr credite
                     writer.WriteStartElement("Nr. Credite");
                     writer.WriteValue(studentList2[i].CrediteTotale);
@@ -147,19 +218,20 @@ namespace PAW_Proiect.Formulare
                     writer.WriteEndDocument();
                     MessageBox.Show("XML");
                 }
+
                 writer.WriteStartDocument();
-                
+
                 writer.WriteStartElement("TipFinantare");
                 writer.WriteValue("test");
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
-                
+
                 writer.Close();
-                
+
                 string str = Encoding.UTF8.GetString(memoryStream.ToArray());
                 memoryStream.Close();
 
-                StreamWriter streamWriter = new StreamWriter("fisier.xml");
+                StreamWriter streamWriter = new StreamWriter("fisierExport.xml");
                 streamWriter.WriteLine(str);
                 streamWriter.Close();
             }
@@ -169,9 +241,27 @@ namespace PAW_Proiect.Formulare
             }
         }
 
-        private void xMLToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void binarExp_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            //se face pe acelasi fisier, deci nu mai trebuie sfd
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream fileStream = new FileStream("fisier.dat",
+                FileMode.Create, FileAccess.Write);
+            binaryFormatter.Serialize(fileStream, tvStudenti.Text);
+            fileStream.Close();
+            tvStudenti.Text = "";
+            MessageBox.Show("Binar Export");
+        }
+
+        private void binarImp_Click(object sender, EventArgs e)
+        {
+            BinaryFormatter binaryFormatter = new BinaryFormatter();
+            FileStream fileStream = new FileStream("fisier.dat",
+                FileMode.Open, FileAccess.Read);
+            //cast catre string pt ca returneaza un obj
+            tvStudenti.Text = (string) binaryFormatter.Deserialize(fileStream);
+            fileStream.Close();
+            MessageBox.Show("Binar Import");
         }
     }
 }
