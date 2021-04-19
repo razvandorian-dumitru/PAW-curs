@@ -22,11 +22,11 @@
             if (cod >= 0)
                 this.cod = cod;
             this.nume = nume;
-            if (varsta >= 0)
+            if (varsta >= 18)
                 this.varsta = varsta;
             if (sex != null)
                 this.sex = sex;
-            if (an >= 18)
+            if (an >= 1)
                 this.an = an;
         }
 
@@ -68,11 +68,8 @@
 
         public int An
         {
-            get => varsta;
-            set
-            {
-                if (value >= 1 && value <= 4) an = value;
-            }
+            get => an;
+            set => an = value;
         }
 
         public override string ToString()
