@@ -31,7 +31,6 @@ namespace PAW_Proiect.Formulare
         /// </summary>
         private void InitializeComponent()
         {
-            this.tvStudenti = new System.Windows.Forms.Label();
             this.sfdScriereText = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -42,18 +41,9 @@ namespace PAW_Proiect.Formulare
             this.textImp = new System.Windows.Forms.ToolStripMenuItem();
             this.xmlImp = new System.Windows.Forms.ToolStripMenuItem();
             this.binarImp = new System.Windows.Forms.ToolStripMenuItem();
+            this.tvStudenti = new System.Windows.Forms.TreeView();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tvStudenti
-            // 
-            this.tvStudenti.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (216)))), ((int) (((byte) (208)))), ((int) (((byte) (193)))));
-            this.tvStudenti.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.tvStudenti.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tvStudenti.Location = new System.Drawing.Point(0, 28);
-            this.tvStudenti.Name = "tvStudenti";
-            this.tvStudenti.Size = new System.Drawing.Size(800, 249);
-            this.tvStudenti.TabIndex = 0;
             // 
             // menuStrip1
             // 
@@ -120,6 +110,16 @@ namespace PAW_Proiect.Formulare
             this.binarImp.Text = "Binar";
             this.binarImp.Click += new System.EventHandler(this.binarImp_Click);
             // 
+            // tvStudenti
+            // 
+            this.tvStudenti.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (216)))), ((int) (((byte) (208)))), ((int) (((byte) (193)))));
+            this.tvStudenti.Dock = System.Windows.Forms.DockStyle.Left;
+            this.tvStudenti.ForeColor = System.Drawing.Color.FromArgb(((int) (((byte) (128)))), ((int) (((byte) (64)))), ((int) (((byte) (0)))));
+            this.tvStudenti.Location = new System.Drawing.Point(0, 28);
+            this.tvStudenti.Name = "tvStudenti";
+            this.tvStudenti.Size = new System.Drawing.Size(237, 422);
+            this.tvStudenti.TabIndex = 8;
+            // 
             // StudentiForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -128,6 +128,7 @@ namespace PAW_Proiect.Formulare
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tvStudenti);
             this.Controls.Add(this.menuStrip1);
+            this.ForeColor = System.Drawing.Color.FromArgb(((int) (((byte) (128)))), ((int) (((byte) (64)))), ((int) (((byte) (0)))));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "StudentiForm";
             this.Text = "StudentiForm";
@@ -137,6 +138,8 @@ namespace PAW_Proiect.Formulare
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.TreeView tvStudenti;
 
         private System.Windows.Forms.ToolStripMenuItem binarExp;
         private System.Windows.Forms.ToolStripMenuItem binarImp;
@@ -150,8 +153,6 @@ namespace PAW_Proiect.Formulare
         private System.Windows.Forms.ToolStripMenuItem xmlImp;
 
         private System.Windows.Forms.SaveFileDialog sfdScriereText;
-
-        private System.Windows.Forms.Label tvStudenti;
 
         #endregion
     }

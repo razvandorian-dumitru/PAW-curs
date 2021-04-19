@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
 using System.Windows.Forms;
 using PAW_Proiect.clase;
 
@@ -19,10 +21,18 @@ namespace PAW_Proiect.Formulare
 
         public void display()
         {
-            string final = "";
-            for (int i = 0; i < materiiList.Count; i++)
-                final += materiiList[i].ToString() + Environment.NewLine;
-            lbMaterii.Text = final;
+            //listView1.Clear(); -> sterge si coloanele, nu e bn
+            lvMaterii.Items.Clear();
+            this.lvMaterii.GridLines = true;
+            foreach (Materie materie in materiiList)
+            {
+                ListViewItem item = new ListViewItem(materie.Denumire);
+                item.SubItems.Add(materie.Credite.ToString());
+                item.SubItems.Add(materie.Nota.ToString());
+                item.SubItems.Add(materie.TipExamen.ToString());
+
+                lvMaterii.Items.Add(item);
+            }
         }
 
         private void btAddMaterie_Click(object sender, EventArgs e)
@@ -111,10 +121,9 @@ namespace PAW_Proiect.Formulare
                     tbDenumire.Clear();
                     numCredite.Value = 1;
                     numNota.Value = 1;
-                    lbMaterii.Text = "";
+                    lvMaterii.Items.Clear();
 
                     materiiList = new List<Materie>();
-                    
                 }
             }
         }
@@ -127,13 +136,15 @@ namespace PAW_Proiect.Formulare
 
         private void etNume_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) &&
+                !char.IsWhiteSpace(e.KeyChar))
                 e.Handled = true;
         }
 
         private void etDenumire_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) &&
+                !char.IsWhiteSpace(e.KeyChar))
                 e.Handled = true;
         }
 
@@ -185,7 +196,6 @@ namespace PAW_Proiect.Formulare
         {
             if (e.Control && e.KeyCode == Keys.L)
             {
-                
                 btLista.PerformClick();
             }
         }
@@ -203,6 +213,34 @@ namespace PAW_Proiect.Formulare
         private void cbSex_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = true;
+        }
+
+        private void stergeMateriaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //todo
+            foreach (ListViewItem item in lvMaterii.Items)
+                if (item.Selected)
+                {
+                    item.Remove();
+                    materiiList.RemoveAt(item.Index);
+                }
+        }
+
+        private void lvMaterii_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            tbDenumire.Text = e.Item.SubItems[0].Text;
+            numCredite.Value = Convert.ToInt32(e.Item.SubItems[1].Text);
+            numNota.Value = Convert.ToInt32(e.Item.SubItems[2].Text);
+
+
+            /*int cod = Convert.ToInt32(e.Item.SubItems[0].Text);
+            foreach (Student student in studentList)
+                if (student.Cod == cod)
+                {
+                    tbCod.Text = student.Cod.ToString();
+                    tbNume.Text = student.Nume;
+                    tbNota.Text = student.Nota.ToString();
+                }*/
         }
     }
 }

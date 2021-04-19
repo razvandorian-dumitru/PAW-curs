@@ -40,7 +40,13 @@ namespace PAW_Proiect.Formulare
             this.Nume = new System.Windows.Forms.Label();
             this.btSaveStud = new System.Windows.Forms.Button();
             this.GbMaterie = new System.Windows.Forms.GroupBox();
-            this.lbMaterii = new System.Windows.Forms.Label();
+            this.lvMaterii = new System.Windows.Forms.ListView();
+            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
+            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.stergeMateriaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Materie = new System.Windows.Forms.Label();
             this.btAddMaterie = new System.Windows.Forms.Button();
             this.numNota = new System.Windows.Forms.NumericUpDown();
@@ -64,6 +70,7 @@ namespace PAW_Proiect.Formulare
             this.fOndToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize) (this.numericVarsta)).BeginInit();
             this.GbMaterie.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.numNota)).BeginInit();
             ((System.ComponentModel.ISupportInitialize) (this.numCredite)).BeginInit();
             this.gbAn.SuspendLayout();
@@ -73,14 +80,14 @@ namespace PAW_Proiect.Formulare
             // 
             // numericVarsta
             // 
-            this.numericVarsta.Location = new System.Drawing.Point(65, 111);
+            this.numericVarsta.Location = new System.Drawing.Point(74, 120);
             this.numericVarsta.Name = "numericVarsta";
             this.numericVarsta.Size = new System.Drawing.Size(91, 22);
             this.numericVarsta.TabIndex = 25;
             // 
             // tbNume
             // 
-            this.tbNume.Location = new System.Drawing.Point(65, 74);
+            this.tbNume.Location = new System.Drawing.Point(74, 88);
             this.tbNume.Name = "tbNume";
             this.tbNume.Size = new System.Drawing.Size(120, 22);
             this.tbNume.TabIndex = 23;
@@ -89,7 +96,7 @@ namespace PAW_Proiect.Formulare
             // 
             // tbCod
             // 
-            this.tbCod.Location = new System.Drawing.Point(65, 38);
+            this.tbCod.Location = new System.Drawing.Point(74, 52);
             this.tbCod.Name = "tbCod";
             this.tbCod.Size = new System.Drawing.Size(120, 22);
             this.tbCod.TabIndex = 21;
@@ -98,7 +105,7 @@ namespace PAW_Proiect.Formulare
             // 
             // tvVarsta
             // 
-            this.tvVarsta.Location = new System.Drawing.Point(9, 113);
+            this.tvVarsta.Location = new System.Drawing.Point(18, 127);
             this.tvVarsta.Name = "tvVarsta";
             this.tvVarsta.Size = new System.Drawing.Size(50, 15);
             this.tvVarsta.TabIndex = 28;
@@ -106,7 +113,7 @@ namespace PAW_Proiect.Formulare
             // 
             // tvCod
             // 
-            this.tvCod.Location = new System.Drawing.Point(9, 45);
+            this.tvCod.Location = new System.Drawing.Point(18, 59);
             this.tvCod.Name = "tvCod";
             this.tvCod.Size = new System.Drawing.Size(50, 15);
             this.tvCod.TabIndex = 24;
@@ -114,7 +121,7 @@ namespace PAW_Proiect.Formulare
             // 
             // Nume
             // 
-            this.Nume.Location = new System.Drawing.Point(9, 77);
+            this.Nume.Location = new System.Drawing.Point(18, 91);
             this.Nume.Name = "Nume";
             this.Nume.Size = new System.Drawing.Size(50, 15);
             this.Nume.TabIndex = 22;
@@ -132,7 +139,7 @@ namespace PAW_Proiect.Formulare
             // 
             // GbMaterie
             // 
-            this.GbMaterie.Controls.Add(this.lbMaterii);
+            this.GbMaterie.Controls.Add(this.lvMaterii);
             this.GbMaterie.Controls.Add(this.Materie);
             this.GbMaterie.Controls.Add(this.btAddMaterie);
             this.GbMaterie.Controls.Add(this.numNota);
@@ -148,15 +155,57 @@ namespace PAW_Proiect.Formulare
             this.GbMaterie.TabStop = false;
             this.GbMaterie.Text = "Materie";
             // 
-            // lbMaterii
+            // lvMaterii
             // 
-            this.lbMaterii.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (216)))), ((int) (((byte) (208)))), ((int) (((byte) (193)))));
-            this.lbMaterii.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lbMaterii.ForeColor = System.Drawing.Color.FromArgb(((int) (((byte) (128)))), ((int) (((byte) (64)))), ((int) (((byte) (0)))));
-            this.lbMaterii.Location = new System.Drawing.Point(0, 183);
-            this.lbMaterii.Name = "lbMaterii";
-            this.lbMaterii.Size = new System.Drawing.Size(299, 161);
-            this.lbMaterii.TabIndex = 17;
+            this.lvMaterii.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (216)))), ((int) (((byte) (208)))), ((int) (((byte) (193)))));
+            this.lvMaterii.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.lvMaterii.CheckBoxes = true;
+            this.lvMaterii.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {this.columnHeader1, this.columnHeader2, this.columnHeader3, this.columnHeader4});
+            this.lvMaterii.ContextMenuStrip = this.contextMenuStrip1;
+            this.lvMaterii.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.lvMaterii.ForeColor = System.Drawing.Color.FromArgb(((int) (((byte) (128)))), ((int) (((byte) (64)))), ((int) (((byte) (0)))));
+            this.lvMaterii.FullRowSelect = true;
+            this.lvMaterii.GridLines = true;
+            this.lvMaterii.Location = new System.Drawing.Point(3, 188);
+            this.lvMaterii.Name = "lvMaterii";
+            this.lvMaterii.Size = new System.Drawing.Size(294, 183);
+            this.lvMaterii.TabIndex = 17;
+            this.lvMaterii.UseCompatibleStateImageBehavior = false;
+            this.lvMaterii.View = System.Windows.Forms.View.Details;
+            this.lvMaterii.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvMaterii_ItemSelectionChanged);
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Denumire";
+            this.columnHeader1.Width = 74;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Nr. Credite";
+            this.columnHeader2.Width = 79;
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Nota";
+            this.columnHeader3.Width = 42;
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Tip Examen";
+            this.columnHeader4.Width = 95;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.stergeMateriaToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(177, 28);
+            // 
+            // stergeMateriaToolStripMenuItem
+            // 
+            this.stergeMateriaToolStripMenuItem.Name = "stergeMateriaToolStripMenuItem";
+            this.stergeMateriaToolStripMenuItem.Size = new System.Drawing.Size(176, 24);
+            this.stergeMateriaToolStripMenuItem.Text = "Sterge Materia";
+            this.stergeMateriaToolStripMenuItem.Click += new System.EventHandler(this.stergeMateriaToolStripMenuItem_Click);
             // 
             // Materie
             // 
@@ -301,7 +350,7 @@ namespace PAW_Proiect.Formulare
             // 
             this.cbSex.FormattingEnabled = true;
             this.cbSex.Items.AddRange(new object[] {"M", "F"});
-            this.cbSex.Location = new System.Drawing.Point(93, 143);
+            this.cbSex.Location = new System.Drawing.Point(74, 149);
             this.cbSex.Name = "cbSex";
             this.cbSex.Size = new System.Drawing.Size(63, 24);
             this.cbSex.TabIndex = 34;
@@ -311,7 +360,7 @@ namespace PAW_Proiect.Formulare
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 143);
+            this.label1.Location = new System.Drawing.Point(18, 157);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(30, 16);
             this.label1.TabIndex = 35;
@@ -333,7 +382,7 @@ namespace PAW_Proiect.Formulare
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.modificareAspectToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(566, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(552, 28);
             this.menuStrip1.TabIndex = 37;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -362,9 +411,10 @@ namespace PAW_Proiect.Formulare
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int) (((byte) (216)))), ((int) (((byte) (208)))), ((int) (((byte) (193)))));
-            this.ClientSize = new System.Drawing.Size(566, 471);
+            this.ClientSize = new System.Drawing.Size(552, 471);
             this.Controls.Add(this.btLista);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.cbSex);
@@ -378,6 +428,7 @@ namespace PAW_Proiect.Formulare
             this.Controls.Add(this.Nume);
             this.Controls.Add(this.btSaveStud);
             this.Controls.Add(this.menuStrip1);
+            this.ForeColor = System.Drawing.Color.Black;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "AddStudent";
             this.Text = "AddStudent";
@@ -386,6 +437,7 @@ namespace PAW_Proiect.Formulare
             ((System.ComponentModel.ISupportInitialize) (this.numericVarsta)).EndInit();
             this.GbMaterie.ResumeLayout(false);
             this.GbMaterie.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize) (this.numNota)).EndInit();
             ((System.ComponentModel.ISupportInitialize) (this.numCredite)).EndInit();
             this.gbAn.ResumeLayout(false);
@@ -396,6 +448,18 @@ namespace PAW_Proiect.Formulare
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+        private System.Windows.Forms.ToolStripMenuItem stergeMateriaToolStripMenuItem;
+
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+
+        private System.Windows.Forms.ListView lvMaterii;
 
         private System.Windows.Forms.ToolStripMenuItem fOndToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fundalToolStripMenuItem;
@@ -413,8 +477,6 @@ namespace PAW_Proiect.Formulare
         private System.Windows.Forms.RadioButton rbAn4;
 
         private System.Windows.Forms.ErrorProvider errorProvider1;
-
-        private System.Windows.Forms.Label lbMaterii;
 
         private System.Windows.Forms.Button btAddMaterie;
         private System.Windows.Forms.TextBox tbDenumire;

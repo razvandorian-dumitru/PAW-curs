@@ -12,21 +12,44 @@ namespace PAW_Proiect.Formulare
 {
     public partial class StudentiForm : Form
     {
-        private List<Student> studentList2;
+        private List<Student> studentList;
 
-        public StudentiForm(List<Student> lista)
+        public StudentiForm(List<Student> studentList)
         {
             InitializeComponent();
-            studentList2 = lista;
+            this.studentList = studentList;
         }
 
         private void refresh()
         {
-            string final = "";
-            foreach (Student student in studentList2)
-                final += student.ToString() + "\n\n";
-            tvStudenti.Text = final;
+            tvStudenti.Nodes.Clear();
+            TreeNode parinte = new TreeNode("Studenti");
+            tvStudenti.Nodes.Add(parinte);
+            foreach (Student student in studentList)
+            {
+                TreeNode nodCod = new TreeNode(student.Cod.ToString());
+
+                TreeNode nodNume = new TreeNode(student.Nume);
+                TreeNode nodVarsta = new TreeNode(student.Varsta.ToString());
+                TreeNode nodSex = new TreeNode(student.Sex);
+                TreeNode nodAn = new TreeNode(student.An.ToString());
+                TreeNode nodMaterii = new TreeNode("Materii(" + student.MateriiList.Count + ")");
+                for (int i = 0; i < student.MateriiList.Count; i++)
+                {
+                    TreeNode nodMaterie = new TreeNode(student.MateriiList[i].Denumire);
+                    nodMaterii.Nodes.Add(nodMaterie);
+                }
+
+                nodCod.Nodes.Add(nodNume);
+                nodCod.Nodes.Add(nodVarsta);
+                nodCod.Nodes.Add(nodSex);
+                nodCod.Nodes.Add(nodAn);
+                nodCod.Nodes.Add(nodMaterii);
+
+                parinte.Nodes.Add(nodCod);
+            }
         }
+
 
         private void btRefresh_Click(object sender, EventArgs e)
         {
@@ -37,7 +60,6 @@ namespace PAW_Proiect.Formulare
         {
             refresh();
         }
-
 
         private void textToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -64,13 +86,11 @@ namespace PAW_Proiect.Formulare
             }
         }
 
-
         private void xMLToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             StreamReader streamReader = new StreamReader("fisierImport.xml");
             string str = streamReader.ReadToEnd();
             streamReader.Close();
-
             XmlReader reader = XmlReader.Create(new StringReader(str));
 
             #region init
@@ -79,7 +99,6 @@ namespace PAW_Proiect.Formulare
             int credite = 0;
             int nota = 0;
             TipExamen tipExamen = TipExamen.VERIFICARE;
-
             int cod = 0;
             string nume = "";
             int varsta = 0;
@@ -142,8 +161,7 @@ namespace PAW_Proiect.Formulare
                 MemoryStream memoryStream = new MemoryStream();
                 XmlTextWriter writer = new XmlTextWriter(memoryStream, Encoding.UTF8);
                 writer.Formatting = Formatting.Indented;
-
-                for (int i = 0; i < studentList2.Count; i++)
+                for (int i = 0; i < studentList.Count; i++)
                 {
                     writer.WriteStartDocument();
 
@@ -151,49 +169,49 @@ namespace PAW_Proiect.Formulare
 
                     //cod
                     writer.WriteStartElement("Cod");
-                    writer.WriteValue(studentList2[i].Cod);
+                    writer.WriteValue(studentList[i].Cod);
                     writer.WriteEndElement();
 
                     //nume
                     writer.WriteStartElement("Nume");
-                    writer.WriteValue(studentList2[i].Nume);
+                    writer.WriteValue(studentList[i].Nume);
                     writer.WriteEndElement();
 
                     //varsta
                     writer.WriteStartElement("Varsta");
-                    writer.WriteValue(studentList2[i].Varsta);
+                    writer.WriteValue(studentList[i].Varsta);
                     writer.WriteEndElement();
 
                     //sex
                     writer.WriteStartElement("Sex");
-                    writer.WriteValue(studentList2[i].Sex);
+                    writer.WriteValue(studentList[i].Sex);
                     writer.WriteEndElement();
 
                     //an
                     writer.WriteStartElement("An");
-                    writer.WriteValue(studentList2[i].An);
+                    writer.WriteValue(studentList[i].An);
                     writer.WriteEndElement();
 
                     writer.WriteStartElement("Materii");
 
-                    for (int j = 0; j < studentList2[i].MateriiList.Count; j++)
+                    for (int j = 0; j < studentList[i].MateriiList.Count; j++)
                     {
                         writer.WriteStartElement("Materie ");
 
                         writer.WriteStartElement("Denumire");
-                        writer.WriteValue(studentList2[i].MateriiList[j].Denumire);
+                        writer.WriteValue(studentList[i].MateriiList[j].Denumire);
                         writer.WriteEndElement();
 
                         writer.WriteStartElement("Nota");
-                        writer.WriteValue(studentList2[i].MateriiList[j].Nota);
+                        writer.WriteValue(studentList[i].MateriiList[j].Nota);
                         writer.WriteEndElement();
 
                         writer.WriteStartElement("Credite");
-                        writer.WriteValue(studentList2[i].MateriiList[j].Credite);
+                        writer.WriteValue(studentList[i].MateriiList[j].Credite);
                         writer.WriteEndElement();
 
                         writer.WriteStartElement("Tip examen");
-                        writer.WriteValue(studentList2[i].MateriiList[j].TipExamen.ToString());
+                        writer.WriteValue(studentList[i].MateriiList[j].TipExamen.ToString());
                         writer.WriteEndElement();
                         writer.WriteEndElement();
                     }
@@ -201,17 +219,17 @@ namespace PAW_Proiect.Formulare
                     writer.WriteEndElement(); //materii
                     //nr credite
                     writer.WriteStartElement("Nr. Credite");
-                    writer.WriteValue(studentList2[i].CrediteTotale);
+                    writer.WriteValue(studentList[i].CrediteTotale);
                     writer.WriteEndElement();
 
                     //media generala
                     writer.WriteStartElement("Varsta");
-                    writer.WriteValue(studentList2[i].Medie);
+                    writer.WriteValue(studentList[i].Medie);
                     writer.WriteEndElement();
 
                     //finantare
                     writer.WriteStartElement("TipFinantare");
-                    writer.WriteValue(studentList2[i].Finantare.ToString());
+                    writer.WriteValue(studentList[i].Finantare.ToString());
                     writer.WriteEndElement();
                     writer.WriteEndElement();
 
@@ -220,17 +238,13 @@ namespace PAW_Proiect.Formulare
                 }
 
                 writer.WriteStartDocument();
-
                 writer.WriteStartElement("TipFinantare");
                 writer.WriteValue("test");
                 writer.WriteEndElement();
                 writer.WriteEndDocument();
-
                 writer.Close();
-
                 string str = Encoding.UTF8.GetString(memoryStream.ToArray());
                 memoryStream.Close();
-
                 StreamWriter streamWriter = new StreamWriter("fisierExport.xml");
                 streamWriter.WriteLine(str);
                 streamWriter.Close();
